@@ -1,0 +1,22 @@
+{
+  "name": "notion2sb",
+  "version": "0.0.1",
+  "description": "Convert Notion export Markdown files to a Scrapbox import JSON file",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "author": "Takayuki Nagatomi <tommyt6073@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4",
+    "vitest": "^0.26.3"
+  },
+  "dependencies": {
+    "gyazo-api": "^0.3.1",
+    "md2sb": "^5.1.2",
+    "ts-node": "^10.9.1"
+  }
+}
