@@ -10,9 +10,9 @@ const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
 
 const main = async () => {
   let page = fs.readFileSync(`testdata/${pageName}.md`).toString();
-  page = page.replaceAll(/(<aside>|<\/aside>)/g, '');
 
-  page = page.replaceAll(/\$(.+)\$/g, '\[\$ $1\]')
+  page = callout(page);
+  page = math(page);
 
   const md2sbPage = await md2sb(page);
 
@@ -32,6 +32,14 @@ const main = async () => {
   }
 
   console.log(result);
+}
+
+function callout(page: string): string {
+  return page.replaceAll(/(<aside>|<\/aside>)/g, '');
+}
+
+function math(page: string): string {
+  return page.replaceAll(/\$(.+)\$/g, '\[\$ $1\]');
 }
 
 async function gyazo(line: string): Promise<string | null> {
