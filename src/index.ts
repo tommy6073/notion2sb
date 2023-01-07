@@ -9,7 +9,7 @@ const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
 
 const main = async () => {
   const pageName = 'Top page c13012c4a1f64bc69ef90874222212a6';
-  const md2sbPage = await md2sb(fs.readFileSync(`${pageName}.md`));
+  const md2sbPage = await md2sb(fs.readFileSync(`testdata/${pageName}.md`));
 
   const rl = readline.createInterface({
     input: Readable.from(md2sbPage),
@@ -21,7 +21,7 @@ const main = async () => {
     const imageLink = line.match(re);
     if (imageLink) {
       const imagePath = decodeURI(imageLink[1]);
-      const res = await gyazoClient.upload(imagePath);
+      const res = await gyazoClient.upload(`testdata/${imagePath}`);
       const gyazoImageURL = res.data.permalink_url;
       result += `[${gyazoImageURL}]\n`;
     } else {
