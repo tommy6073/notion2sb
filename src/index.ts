@@ -9,7 +9,10 @@ const pageName = 'Top page c13012c4a1f64bc69ef90874222212a6';
 const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
 
 const main = async () => {
-  const md2sbPage = await md2sb(fs.readFileSync(`testdata/${pageName}.md`));
+  let page = fs.readFileSync(`testdata/${pageName}.md`).toString();
+  page = page.replaceAll(/(<aside>|<\/aside>)/g, '');
+
+  const md2sbPage = await md2sb(page);
 
   const rl = readline.createInterface({
     input: Readable.from(md2sbPage),
