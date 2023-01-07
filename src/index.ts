@@ -12,6 +12,8 @@ const main = async () => {
   let page = fs.readFileSync(`testdata/${pageName}.md`).toString();
   page = page.replaceAll(/(<aside>|<\/aside>)/g, '');
 
+  page = page.replaceAll(/\$(.+)\$/g, '\[\$ $1\]')
+
   const md2sbPage = await md2sb(page);
 
   const rl = readline.createInterface({
