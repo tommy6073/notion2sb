@@ -3,7 +3,7 @@ import * as readline from 'readline';
 import { Readable } from 'stream';
 import md2sb from 'md2sb';
 import { convertCallout, convertGyazo, convertMath, convertTitle } from './converter';
-import { convertImage } from './extractor';
+import { extractImage } from './extractor';
 
 export const notion2sb = async (pagePath: string): Promise<string> => {
   let page!: string;
@@ -25,7 +25,8 @@ export const notion2sb = async (pagePath: string): Promise<string> => {
   let result = '';
   for await (const line of rl) {
     let convertedLine = `${line}\n`;
-    const img = convertImage(line);
+
+    const img = extractImage(line);
     if (img) {
       try {
         convertedLine = await convertGyazo(pagePath, img);
