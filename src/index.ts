@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-import * as readline from 'readline';
 import * as fs from 'fs';
+import * as converter from './converter';
+import * as readline from 'readline';
 import { Readable } from 'stream';
 import path from 'path';
 import md2sb from 'md2sb';
-import { callout, gyazo, math, title } from './converter';
 
 const main = async () => {
   const pagePath = process.argv[2];
 
   let page = fs.readFileSync(pagePath).toString();
-  page = title(page);
-  page = callout(page);
-  page = math(page);
+  page = converter.title(page);
+  page = converter.callout(page);
+  page = converter.math(page);
 
   const md2sbPage = await md2sb(page);
 
@@ -23,7 +23,7 @@ const main = async () => {
 
   let result = '';
   for await (const line of rl) {
-    const gyazoLine = await gyazo(line, path.dirname(pagePath));
+    const gyazoLine = await converter.gyazo(line, path.dirname(pagePath));
     if (gyazoLine) {
       result += `${gyazoLine}\n`;
       continue;
