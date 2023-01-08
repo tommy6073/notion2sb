@@ -1,4 +1,5 @@
-/// <reference path="./types.d.ts" />
+#!/usr/bin/env node
+
 import * as readline from 'readline';
 import * as fs from 'fs';
 import { Readable } from 'stream';
