@@ -2,9 +2,9 @@
   "name": "notion2sb",
   "version": "0.0.1",
   "description": "Convert Notion export Markdown files to a Scrapbox import JSON file",
-  "main": "dist/index.js",
+  "main": "dist/cmd/index.js",
   "bin": {
-    "notion2sb": "dist/index.js"
+    "notion2sb": "dist/cmd/index.js"
   },
   "scripts": {
     "build": "npx tsc",
