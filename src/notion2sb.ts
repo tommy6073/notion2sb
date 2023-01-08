@@ -1,9 +1,9 @@
 import * as fs from 'fs';
-import * as converter from './converter';
 import * as readline from 'readline';
 import { Readable } from 'stream';
-import path from 'path';
 import md2sb from 'md2sb';
+import { convertCallout, convertGyazo, convertMath, convertTitle } from './converter';
+import { convertImage } from './extractor';
 
 export const notion2sb = async (pagePath: string): Promise<string> => {
   let page!: string;
@@ -12,9 +12,9 @@ export const notion2sb = async (pagePath: string): Promise<string> => {
   } catch (e: any) {
     throw new Error(`Reading Notion page Markdown file failed: ${e.message}`);
   }
-  page = converter.title(page);
-  page = converter.callout(page);
-  page = converter.math(page);
+  page = convertTitle(page);
+  page = convertCallout(page);
+  page = convertMath(page);
 
   const md2sbPage = await md2sb(page);
 
@@ -24,18 +24,17 @@ export const notion2sb = async (pagePath: string): Promise<string> => {
 
   let result = '';
   for await (const line of rl) {
-    let gyazoLine: string | null;
-    try {
-      gyazoLine = await converter.gyazo(line, path.dirname(pagePath));
-    } catch (e: any) {
-      throw new Error(`Gyazo conversion failed: ${e.message}`);
-    }
-    if (gyazoLine) {
-      result += `${gyazoLine}\n`;
-      continue;
+    let convertedLine = `${line}\n`;
+    const img = convertImage(line);
+    if (img) {
+      try {
+        convertedLine = await convertGyazo(pagePath, img);
+      } catch (e: any) {
+        throw new Error(`Gyazo conversion failed: ${e.message}`);
+      }
     }
 
-    result += `${line}\n`;
+    result += convertedLine;
   }
 
   return result;

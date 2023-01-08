@@ -1,35 +1,28 @@
 import Gyazo from 'gyazo-api';
+import path from 'path';
 
 const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
 
-export function title(page: string): string {
+export function convertTitle(page: string): string {
   return page.replace(/^# (.+)$/m, '$1');
 }
 
-export function callout(page: string): string {
+export function convertCallout(page: string): string {
   return page.replaceAll(/(<aside>|<\/aside>)/g, '');
 }
 
-export function math(page: string): string {
+export function convertMath(page: string): string {
   return page.replaceAll(/\$(.+)\$/g, '\[\$ $1\]');
 }
 
-export async function gyazo(line: string, exportDir: string): Promise<string | null> {
-  const re = new RegExp(`\\[(.+\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF))]`);
-  const imageLink = line.match(re);
-
-  if (imageLink) {
-    const imagePath = decodeURI(imageLink[1]);
-    let res!: any;
-    try {
-      res = await gyazoClient.upload(`${exportDir}/${imagePath}`);
-    } catch (e: any) {
-      throw new Error(`upload failed: ${e}`);
-    }
-    const gyazoImageURL = res.data.permalink_url;
-
-    return `[${gyazoImageURL}]`;
+export async function convertGyazo(pagePath: string, img: string): Promise<string> {
+  let res!: any;
+  try {
+    res = await gyazoClient.upload(`${path.dirname(pagePath)}/${img}`);
+  } catch (e: any) {
+    throw new Error(`upload failed: ${e}`);
   }
+  const gyazoImageURL = res.data.permalink_url;
 
-  return null;
+  return `[${gyazoImageURL}]\n`;
 }
