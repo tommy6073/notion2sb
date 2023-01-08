@@ -7,19 +7,21 @@ import { extractImage } from './extractor';
 
 export const notion2sb = async (pagePath: string): Promise<string> => {
   let page!: string;
+
   try {
     page = fs.readFileSync(pagePath).toString();
   } catch (e: any) {
     throw new Error(`Reading Notion page Markdown file failed: ${e.message}`);
   }
+
   page = convertTitle(page);
   page = convertCallout(page);
   page = convertMath(page);
 
-  const md2sbPage = await md2sb(page);
+  page = await md2sb(page);
 
   const rl = readline.createInterface({
-    input: Readable.from(md2sbPage),
+    input: Readable.from(page),
   });
 
   let result = '';
