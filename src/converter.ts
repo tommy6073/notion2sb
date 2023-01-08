@@ -20,7 +20,12 @@ export async function gyazo(line: string, exportDir: string): Promise<string | n
 
   if (imageLink) {
     const imagePath = decodeURI(imageLink[1]);
-    const res = await gyazoClient.upload(`${exportDir}/${imagePath}`);
+    let res!: any;
+    try {
+      res = await gyazoClient.upload(`${exportDir}/${imagePath}`);
+    } catch (e: any) {
+      throw new Error(`upload failed: ${e}`);
+    }
     const gyazoImageURL = res.data.permalink_url;
 
     return `[${gyazoImageURL}]`;
