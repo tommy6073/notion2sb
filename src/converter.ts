@@ -2,7 +2,7 @@ import Gyazo from 'gyazo-api';
 
 const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
 
-export function title(page: string) {
+export function title(page: string): string {
   return page.replace(/^# (.+)$/m, '$1');
 }
 
