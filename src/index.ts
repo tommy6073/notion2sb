@@ -2,15 +2,15 @@
 import * as readline from 'readline';
 import * as fs from 'fs';
 import { Readable } from 'stream';
-import Gyazo from 'gyazo-api';
 import md2sb from 'md2sb';
+import { callout, gyazo, math, title } from './converter';
 
-const pageName = 'Top page c13012c4a1f64bc69ef90874222212a6';
-const gyazoClient = new Gyazo(process.env.GYAZO_ACCESS_TOKEN);
+const exportDir = 'testdata/Export-ae057c6e-6216-44b1-9354-7d127ac08e22';
+const pageName = 'Sub page 1 731aae2b15064faca1cfdc564119e8a9.md';
 
 const main = async () => {
-  let page = fs.readFileSync(`testdata/${pageName}.md`).toString();
-
+  let page = fs.readFileSync(`${exportDir}/${pageName}`).toString();
+  page = title(page);
   page = callout(page);
   page = math(page);
 
@@ -22,7 +22,7 @@ const main = async () => {
 
   let result = '';
   for await (const line of rl) {
-    const gyazoLine = await gyazo(line);
+    const gyazoLine = await gyazo(line, exportDir);
     if (gyazoLine) {
       result += `${gyazoLine}\n`;
       continue;
@@ -32,29 +32,6 @@ const main = async () => {
   }
 
   console.log(result);
-}
-
-function callout(page: string): string {
-  return page.replaceAll(/(<aside>|<\/aside>)/g, '');
-}
-
-function math(page: string): string {
-  return page.replaceAll(/\$(.+)\$/g, '\[\$ $1\]');
-}
-
-async function gyazo(line: string): Promise<string | null> {
-  const re = new RegExp(`\\[(${encodeURI(pageName)}\\/.*\\.(jpg|jpeg|png|gif|JPG|JPEG|PNG|GIF))\\]`);
-  const imageLink = line.match(re);
-
-  if (imageLink) {
-    const imagePath = decodeURI(imageLink[1]);
-    const res = await gyazoClient.upload(`testdata/${imagePath}`);
-    const gyazoImageURL = res.data.permalink_url;
-
-    return `${gyazoImageURL}`;
-  }
-
-  return null;
 }
 
 main();
