@@ -25,6 +25,7 @@ export const notion2sb = async (pagePath: string): Promise<string> => {
   });
 
   let result = '';
+
   for await (const line of rl) {
     let convertedLine = `${line}\n`;
 
