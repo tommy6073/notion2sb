@@ -1,5 +1,5 @@
 {
-  "name": "notion2sb",
+  "name": "@tommy6073/notion2sb",
   "version": "0.0.1",
   "description": "Convert an exported Notion page Markdown file to Scrapbox page text",
   "main": "dist/cmd/index.js",
@@ -19,5 +19,20 @@
   "dependencies": {
     "gyazo-api": "^0.3.1",
     "md2sb": "^5.1.2"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tommy6073/notion2sb.git"
+  },
+  "keywords": [
+    "scrapbox",
+    "notion"
+  ],
+  "bugs": {
+    "url": "https://github.com/tommy6073/notion2sb/issues"
+  },
+  "homepage": "https://github.com/tommy6073/notion2sb"
 }
