@@ -5,7 +5,7 @@ Convert an exported Notion page Markdown file to Scrapbox page text
 ## Installation
 
 ```shell-session
-$ npm install -g notion2sb
+$ npm install -g @tommy6073/notion2sb
 ```
 
 ## Usage
