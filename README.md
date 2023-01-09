@@ -15,7 +15,7 @@ $ npm install -g notion2sb
    - Include content: Everything
    - Create folders for subpages: On
 2. Unzip exported zip file to somewhere.
-3. Execute notion2sb with an argument which is a path to the Notion page .md file to convert from.
+3. Execute notion2sb with an argument which is a path to the Notion page .md file to convert
 
 ### Examples
 
