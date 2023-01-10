@@ -29,5 +29,5 @@ $ notion2sb '/Users/tnagatomi/Export-0b036b8c-1cdf-4481-811f-209d2480627c/Page 1
 #### Write to a file
 
 ```shell-session
-$ notion2sb '/Users/tnagatomi/Export-0b036b8c-1cdf-4481-811f-209d2480627c/Page 1 bca29e3a1793444ea56b27e1b8486347/Sub page 1 731aae2b15064faca1cfdc564119e8a9.md'
+$ notion2sb '/Users/tnagatomi/Export-0b036b8c-1cdf-4481-811f-209d2480627c/Page 1 bca29e3a1793444ea56b27e1b8486347/Sub page 1 731aae2b15064faca1cfdc564119e8a9.md > sb_page.txt'
 ```
