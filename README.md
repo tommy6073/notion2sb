@@ -15,7 +15,8 @@ $ npm install -g @tommy6073/notion2sb
    - Include content: Everything
    - Create folders for subpages: On
 2. Unzip exported zip file to somewhere.
-3. Execute notion2sb with an argument which is a path to the Notion page .md file to convert
+3. Set `GYAZO_ACCESS_TOKEN` environment variable to your Gyazo OAuth access token. You can get it from https://gyazo.com/oauth/applications. It'll be used for uploading images in a page to gyazo.com.
+4. Execute notion2sb with an argument which is a path to the Notion page .md file to convert
 
 ### Examples
 
