@@ -2,7 +2,7 @@
 
 Convert an exported Notion page Markdown file to Scrapbox page text
 
-It converts Notion unique Markdown file to [md2sb](https://github.com/pastak/scrapbox-converter/tree/master/packages/md2sb) compatible one, then encodes it to Scrapbox style text using md2sb.  
+It converts a Notion unique Markdown file to [md2sb](https://github.com/pastak/scrapbox-converter/tree/master/packages/md2sb) compatible one, then encodes it to Scrapbox style text using md2sb.  
 It also extracts images and upload them to Gyazo, then replace the image links with Gyazo url.
 
 ## Installation
