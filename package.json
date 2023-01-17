@@ -1,6 +1,6 @@
 {
   "name": "@tommy6073/notion2sb",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Convert an exported Notion page Markdown file to Scrapbox page text",
   "main": "dist/cmd/index.js",
   "bin": {
